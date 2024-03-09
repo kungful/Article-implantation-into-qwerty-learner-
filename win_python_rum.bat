@@ -22,5 +22,6 @@ if exist %venv_dir%\Scripts\activate.bat (
     call %venv_dir%\Scripts\activate
     pip install -r %script_dir%requirements.txt
     python %script_dir%1demo.py
-  
+    REM 关闭虚拟环境
+    deactivate
 )

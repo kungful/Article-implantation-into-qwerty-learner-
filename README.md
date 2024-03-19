@@ -12,7 +12,7 @@
 
 准备环境：
 
-确保你的电脑上已经安装了Python，下载地址：https://www.python.org/
+确保你的电脑上已经安装了Python，python下载地址：(https://www.python.org/);
 在脚本文件所在目录打开命令行工具（如cmd或PowerShell）。
 运行脚本：
 

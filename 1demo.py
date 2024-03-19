@@ -11,7 +11,7 @@ import pronouncing
 class ArticleTranslatorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("文章翻译器")
+        self.root.title("文章植入qwerty")
         self.root.configure(bg="black")
 
         self.frame = tk.Frame(self.root, bg="black")
@@ -37,18 +37,29 @@ class ArticleTranslatorApp:
         self.api_menu = tk.OptionMenu(self.frame, self.api_var, "谷歌", "必应")
         self.api_menu.grid(row=3, column=1, padx=5, pady=5)
 
+        self.word_per_line_label = tk.Label(self.frame, text="每行翻译单词数量:", bg="black", fg="white")
+        self.word_per_line_label.grid(row=4, column=0, padx=5, pady=5, sticky="w")
+
+        self.word_per_line_scale = tk.Scale(self.frame, from_=1, to=10, orient="horizontal")
+        self.word_per_line_scale.set(1)  # 默认为每行翻译一个单词
+        self.word_per_line_scale.grid(row=4, column=1, padx=5, pady=5)
+
         self.result_label = tk.Label(self.frame, text="翻译结果:", bg="black", fg="white")
-        self.result_label.grid(row=4, column=0, padx=5, pady=5, sticky="w")
+        self.result_label.grid(row=5, column=0, padx=5, pady=5, sticky="w")
 
         self.result_text = scrolledtext.ScrolledText(self.frame, width=40, height=10)
-        self.result_text.grid(row=5, column=0, padx=5, pady=5, columnspan=2)
+        self.result_text.grid(row=6, column=0, padx=5, pady=5, columnspan=2)
+
+        self.usage_label = tk.Label(self.frame, text="使用说明:\n1. 翻译后请保存到qwerty-learner\\public\\dicts目录进行替换。\n2. 如果qwerty没有显示，需在qwerty-learner\\src\\resources\\dictionary.ts中添加索引。\n3. 关于qwerty添加词典的教程请参考：https://github.com/RealKai42/qwerty-learner/blob/master/docs/toBuildDict.md", bg="black", fg="white")
+        self.usage_label.grid(row=7, column=0, padx=5, pady=5, columnspan=2)
 
         self.d = cmudict.dict()
 
     def translate_article(self):
         article = self.text_area.get("1.0", tk.END)
+        word_per_line = self.word_per_line_scale.get()
         filtered_article = self.filter_non_english_words(article)
-        translated_article = self._translate_text(filtered_article)
+        translated_article = self._translate_text(filtered_article, word_per_line)
         result_json = json.dumps(translated_article, ensure_ascii=False, indent=4)
         self.result_text.delete(1.0, tk.END)
         self.result_text.insert(tk.END, result_json)
@@ -62,29 +73,33 @@ class ArticleTranslatorApp:
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(json_data)
 
-    def _translate_text(self, text, dest='zh-CN'):
+    def _translate_text(self, text, word_per_line, dest='zh-CN'):
         api = self.api_var.get()
         if api == "谷歌":
             translator = GoogleTranslator()
             translated_article = []
-            for word in text.split():
-                translation = translator.translate(word, dest=dest)
+            words = text.split()
+            for i in range(0, len(words), word_per_line):
+                chunk = " ".join(words[i:i+word_per_line])
+                translation = translator.translate(chunk, dest=dest)
                 word_dict = {
-                    "name": word,
+                    "name": chunk,
                     "trans": [translation.text],
-                    "usphone": self.get_phonetic(word),
+                    "usphone": self.get_phonetic(chunk),
                     "ukphone": ""
                 }
                 translated_article.append(word_dict)
             return translated_article
         elif api == "必应":
             translated_article = []
-            for word in text.split():
-                translation = self.translate_text_bing(word, dest)
+            words = text.split()
+            for i in range(0, len(words), word_per_line):
+                chunk = " ".join(words[i:i+word_per_line])
+                translation = self.translate_text_bing(chunk, dest)
                 word_dict = {
-                    "name": word,
+                    "name": chunk,
                     "trans": [translation],
-                    "usphone": self.get_phonetic(word),
+                    "usphone": self.get_phonetic(chunk),
                     "ukphone": ""
                 }
                 translated_article.append(word_dict)

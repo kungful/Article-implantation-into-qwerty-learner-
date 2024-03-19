@@ -1,3 +1,8 @@
+<video controls width="500">
+    <source src="https://github.com/kungful/Article-implantation-into-qwerty-learner-/blob/main/2024-03-19%2020-05-41.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
 ![图片描述](https://github.com/kungful/Article-implantation-into-qwerty-learner-/blob/main/image2%20-%20%E5%89%AF%E6%9C%AC.png)
 ![图片描述](https://github.com/kungful/Article-implantation-into-qwerty-learner-/blob/main/image%20-%20%E5%89%AF%E6%9C%AC.png)
 使用说明

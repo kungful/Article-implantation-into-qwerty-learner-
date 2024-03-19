@@ -1,5 +1,5 @@
-https://github.com/kungful/Article-implantation-into-qwerty-learner-/blob/main/image2%20-%20%E5%89%AF%E6%9C%AC.png
-https://github.com/kungful/Article-implantation-into-qwerty-learner-/blob/main/image%20-%20%E5%89%AF%E6%9C%AC.png
+![图片描述]([https://raw.githubusercontent.com/kungful/Article-implantation-into-qwerty-learner-/main/image%20-%20%E5%89%AF%E6%9C%AC.png](https://github.com/kungful/Article-implantation-into-qwerty-learner-/blob/main/image2%20-%20%E5%89%AF%E6%9C%AC.png))
+
 使用说明
 请搭配这个项目使用 https://github.com/RealKai42/qwerty-learner
 

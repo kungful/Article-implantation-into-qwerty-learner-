@@ -11,6 +11,7 @@
 【如何运行：有两个方法】
 
 一，如果你安装了python直接点击根目录的 win_python_run.bat 文件
+
 二，用命令行直接运行1demo，前提是安装了依赖文件的依赖库，
     
     在根目录地址栏输入cmd 终端输入命令行 pip install requirements.txt 

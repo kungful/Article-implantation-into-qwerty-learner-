@@ -8,6 +8,10 @@
 使用说明
 请搭配这个项目使用 https://github.com/RealKai42/qwerty-learner
 
+如何运行：有两个方法
+一，如果你安装了python直接点击根目录的 win_python_run.bat 文件
+二，用命令行直接运行1demo，前提是安装了依赖文件的依赖库，在根目录地址栏输入cmd 终端输入命令行 pip install requirements.txt 
+    安装完成后，终端输入命令行 python 1demo.py
 翻译后保存到qwerty-learner\public\dicts的目录进行替换，或者如需增加新翻译词典位置模块请到qwerty-learner\src\resources\dictionary.ts进行添加索引。
 
 准备环境：
